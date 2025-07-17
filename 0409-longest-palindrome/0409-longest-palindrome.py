@@ -1,17 +1,24 @@
 class Solution:
     def longestPalindrome(self, s: str) -> int:
-        freq = defaultdict(int)
-        len = 0
+        freq = [0] * 52
+        cnt = 0
+        first_odd = True
+        
         for c in s:
-            freq[c] += 1
-        flag = 0
-        for c in freq:
-            if freq[c] % 2 == 0:
-                len += freq[c]
+            if 'a' <= c <= 'z':
+                freq[ord(c) - ord('a')] += 1
+            elif 'A' <= c <= 'Z':
+                freq[ord(c) - ord('A') + 26] += 1
+            
+
+        for f in freq:
+            if f % 2 == 0:
+                cnt += f
             else:
-                if flag == 1:
-                    len += (freq[c] - 1)
+                if first_odd:
+                    cnt += f
+                    first_odd = False
                 else:
-                    len += freq[c]
-                    flag = 1
-        return len
+                    cnt += (f - 1)
+        return cnt
+                
