@@ -4,27 +4,24 @@ class Solution:
             return 0
         
         rows, cols = len(grid), len(grid[0])
-        visited = set()
-        directions = ((0,1), (0,-1), (1,0), (-1,0))
+        res = 0
+        directions = [(1,0), (-1,0), (0, 1), (0, -1)]
 
-        def traverse(i, j):
-            queue = deque([(i, j)])
-            while queue:
-                curr_i,curr_j = queue.popleft()
-                if grid[curr_i][curr_j] == '0':
-                    continue
-                if (curr_i, curr_j) not in visited:
-                    visited.add((curr_i, curr_j))
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == '1':
+                    res += 1
+                    q = deque([(r, c)])
+                    grid[r][c] = '0'
 
-                    for direction in directions:
-                        next_i, next_j = curr_i + direction[0], curr_j + direction[1]
-                        if 0 <= next_i < rows and 0<= next_j < cols:
-                            queue.append((next_i, next_j))
-                    
-        island = 0
-        for i in range(rows):
-            for j in range(cols):
-                if (i, j) not in visited and (grid[i][j] == '1'):
-                    traverse(i,j)
-                    island += 1
-        return island
+                    while q:
+                        i , j = q.popleft()
+                        for di, dj in directions:
+                            ni, nj = i + di, j + dj
+                            if 0 <= ni < rows and 0 <= nj < cols and grid[ni][nj] == '1':
+                                grid[ni][nj] = '0'
+                                q.append((ni, nj))
+        return res
+            
+
+        
