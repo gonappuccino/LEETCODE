@@ -1,12 +1,11 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        seen = {}
-
-        [1,5,3,4],6
+        freq = {}
 
         for i in range(len(nums)):
             comp = target - nums[i]
-            if nums[i] in seen:
-                return [seen[nums[i]], i]
-            seen[comp] = i
+        
+            if comp in freq:
+                return [freq[comp], i]
+            freq[nums[i]] = i
         return []
