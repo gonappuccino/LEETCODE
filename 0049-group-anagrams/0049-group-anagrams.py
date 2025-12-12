@@ -3,13 +3,13 @@ class Solution:
         seen = {}
 
         for s in strs:
-            new_s = "".join(sorted(s))
-            if new_s in seen:
-                seen[new_s].append(s)
+            curr = sorted(s)
+            curr = ''.join(curr)
+            if curr in seen:
+                seen[curr].append(s)
             else:
-                seen[new_s] = [s]
-        
+                seen[curr] = [s]
         res = []
-        for v in seen.values():
-            res.append(v)
+        for first in seen:
+            res.append(seen[first])
         return res
