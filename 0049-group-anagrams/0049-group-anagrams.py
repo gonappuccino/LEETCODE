@@ -3,11 +3,10 @@ class Solution:
         group = defaultdict(list)
 
         for s in strs:
-            cnt = [0] * 26
-            for ch in s:
-                cnt[ord(ch) - ord('a')] += 1
-            key = tuple(cnt)
-            group[key].append(s)
-        
+            sorted_s = sorted(s)
+            sorted_s = ''.join(sorted_s)
+            group[sorted_s].append(s)
         return list(group.values())
+
+        
         
