@@ -1,10 +1,10 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        freq ={}
+        freq = {}
 
-        for i, num in enumerate(nums):
-            c = target - num
-            if c in freq:
-                return [freq[c], i]
-            freq[num] = i
+        for i in range(len(nums)):
+            complement = target - nums[i]
+            if complement in freq:
+                return [freq[complement], i]
+            freq[nums[i]] = i
         return []
